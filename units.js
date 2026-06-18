@@ -14,11 +14,11 @@
      UNITS_STANDARD = regular leases. UNITS_SHORT = short-term, min 4 months.
      ------------------------------------------------------------------ */
   var UNITS_STANDARD = [
+    { num: 251, rent: 1848, videoId: "xNEewx8bYEs" },
     { num: 365, rent: 1841, videoId: "6ZWoaPv2iuM" },
     { num: 665, rent: 1841, videoId: "J37rhAHwxHI" },
     { num: 370, rent: 1800, videoId: "CUQlwEY_tBI" },
-    { num: 564, rent: 1688, videoId: "Sk6oKKO2J6c" },
-    { num: 664, rent: 1670, videoId: "Vcv0JWkGxdA" }
+    { num: 564, rent: 1688, videoId: "Sk6oKKO2J6c" }
   ];
   var UNITS_SHORT = [
     { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
