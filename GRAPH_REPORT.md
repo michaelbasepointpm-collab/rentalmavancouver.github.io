@@ -70,8 +70,12 @@ merged into `index.html` and deleted, per the owner's single-website requirement
   shadow lift) and `.btn-ripple` (expanding blue circles; needs 5 empty `<span>`s + 1 label
   span). Featured on the contact band.
 - **Unit cards** use a floating gradient header (negative-margin media + colored shadow).
-- **Video modal is portrait (9:16)** to fit the vertical YouTube tour videos. Unit 665 has the
-  first real `videoId` (`AuJsVOf0lS0`).
+- **Video modal is portrait (9:16)** to fit the vertical YouTube tour videos. Each unit's
+  `videoId` (in `units.js`) drives its thumbnail and in-page player; a unit with `videoId: ""`
+  simply renders without a play button (walkthrough pending).
+- **YouTube Error 153 fix:** `<meta name="referrer" ...>` + the player iframe sets
+  `referrerPolicy="strict-origin-when-cross-origin"`, loads from `youtube.com` with `playsinline`
+  and an `&origin` (only on http(s)). Must be tested on a host/localhost, not `file://`.
 - **Footer social:** Instagram (`@thisismyalma`) + WhatsApp (`+1 604 213 1171`) only.
 - **Two more layout bugs fixed:** `.hero-inner` used `max-width: 18ch` (ch on the small
   container font ≈ 150px, squeezing the hero); now `min(100%, 60rem)` and fully responsive.

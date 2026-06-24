@@ -16,12 +16,12 @@
   var UNITS_STANDARD = [
     { num: 251, rent: 1848, videoId: "xNEewx8bYEs" },
     { num: 365, rent: 1841, videoId: "6ZWoaPv2iuM" },
-    { num: 665, rent: 1841, videoId: "J37rhAHwxHI" },
     { num: 370, rent: 1800, videoId: "CUQlwEY_tBI" },
-    { num: 672, rent: 1891, videoId: "euMLwF_natU" }
+    { num: 672, rent: 1891, videoId: "euMLwF_natU" },
+    { num: 553, rent: 1694, videoId: "" } // walkthrough coming soon
   ];
   var UNITS_SHORT = [
-    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
+    { num: 271, rent: 1995, videoId: "5Xid7jBf9SY" },
     { num: 256, rent: 1757, videoId: "9ky6iQ1oBow" }
   ];
   var UNITS = UNITS_STANDARD.concat(UNITS_SHORT); // combined, for currency + schema
