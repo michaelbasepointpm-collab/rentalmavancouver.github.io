@@ -18,7 +18,7 @@
     { num: 365, rent: 1841, videoId: "6ZWoaPv2iuM" },
     { num: 370, rent: 1800, videoId: "CUQlwEY_tBI" },
     { num: 672, rent: 1891, videoId: "euMLwF_natU" },
-    { num: 553, rent: 1694, videoId: "" } // walkthrough coming soon
+    { num: 553, rent: 1694, videoId: "asOgn4Gsgzs" }
   ];
   var UNITS_SHORT = [
     { num: 271, rent: 1995, videoId: "5Xid7jBf9SY" },
