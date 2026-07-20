@@ -16,7 +16,6 @@
   var UNITS_STANDARD = [
     { num: 365, rent: 1841, videoId: "6ZWoaPv2iuM" },
     { num: 672, rent: 1891, videoId: "euMLwF_natU" },
-    { num: 361, rent: 1950, videoId: "MOkXb2JNf2o" },
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
   ];
   var UNITS_SHORT = [
