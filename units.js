@@ -14,13 +14,13 @@
      UNITS_STANDARD = regular leases. UNITS_SHORT = short-term, min 4 months.
      ------------------------------------------------------------------ */
   var UNITS_STANDARD = [
-    { num: 672, rent: 1891, videoId: "euMLwF_natU" },
-    { num: 361, rent: 1950, videoId: "MOkXb2JNf2o" },
+    { num: 672, rent: 1891, videoId: "euMLwF_natU", note: "Application in progress" },
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
   ];
   var UNITS_SHORT = [
-    { num: 256, rent: 1757, videoId: "9ky6iQ1oBow" },
-    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" }
+    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" },
+    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
+    { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" }
   ];
   var UNITS = UNITS_STANDARD.concat(UNITS_SHORT); // combined, for currency + schema
 
@@ -112,9 +112,14 @@
 
     var calendarSvg = '<svg viewBox="0 0 448 512" aria-hidden="true"><path d="M128 0c13.3 0 24 10.7 24 24V64H296V24c0-13.3 10.7-24 24-24s24 10.7 24 24V64h40c35.3 0 64 28.7 64 64v16 48V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192 144 128C0 92.7 28.7 64 64 64h40V24c0-13.3 10.7-24 24-24zM400 192H48V448c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V192zM64 112c-8.8 0-16 7.2-16 16v16H400V128c0-8.8-7.2-16-16-16H64z"/></svg>';
 
+    var noteBadge = u.note
+      ? '<span class="unit-note">' + u.note + "</span>"
+      : "";
+
     return '' +
       '<article class="unit-card reveal" aria-labelledby="unit-' + u.num + '-title">' +
         '<div class="unit-media" ' + thumb + ' role="img" aria-label="ALMA studio unit ' + u.num + '">' +
+          noteBadge +
           mediaInner +
         "</div>" +
         '<div class="unit-body">' +
