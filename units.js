@@ -14,13 +14,14 @@
      UNITS_STANDARD = regular leases. UNITS_SHORT = short-term, min 4 months.
      ------------------------------------------------------------------ */
   var UNITS_STANDARD = [
-    { num: 672, rent: 1891, videoId: "euMLwF_natU", note: "Application in progress" },
-    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
+    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" },
+    { num: 566, rent: 1841, videoId: "" },
+    { num: 366, rent: 1757, videoId: "", note: "Application in progress" },
+    { num: 258, rent: 1891, videoId: "" }
   ];
   var UNITS_SHORT = [
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" },
-    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
-    { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" }
+    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" }
   ];
   var UNITS = UNITS_STANDARD.concat(UNITS_SHORT); // combined, for currency + schema
 
@@ -101,7 +102,7 @@
     var hasVideo = !!u.videoId;
     var thumb = hasVideo
       ? 'style="background-image:url(https://img.youtube.com/vi/' + escapeAttr(u.videoId) + '/hqdefault.jpg)"'
-      : "";
+      : 'style="background-image:url(assets/images/units/coming-soon.jpg)"'; // no video yet
 
     var mediaInner = hasVideo
       ? '<button class="play-btn" data-video="' + escapeAttr(u.videoId) +
