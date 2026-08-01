@@ -14,14 +14,14 @@
      UNITS_STANDARD = regular leases. UNITS_SHORT = short-term, min 4 months.
      ------------------------------------------------------------------ */
   var UNITS_STANDARD = [
-    { num: 372, rent: 1694, videoId: "GDFjSgCHF8c" },
     { num: 566, rent: 1841, videoId: "" },
-    { num: 258, rent: 1891, videoId: "Zcs58RkYuQA", note: "Application in progress" }
+    { num: 258, rent: 1891, videoId: "Zcs58RkYuQA", note: "Application in progress" },
+    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
   ];
   var UNITS_SHORT = [
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" },
     { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
-    { num: 270, rent: 1995, videoId: "" }
+    { num: 270, rent: 1995, videoId: "CUQlwEY_tBI", note: "Similar unit video" }
   ];
   var UNITS = UNITS_STANDARD.concat(UNITS_SHORT); // combined, for currency + schema
 
