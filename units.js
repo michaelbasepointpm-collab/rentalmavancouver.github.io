@@ -15,7 +15,6 @@
      ------------------------------------------------------------------ */
   var UNITS_STANDARD = [
     { num: 566, rent: 1841, videoId: "", note: "Application in progress", noteKind: "status" },
-    { num: 258, rent: 1891, videoId: "Zcs58RkYuQA", note: "Application in progress", noteKind: "status" },
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
   ];
   var UNITS_SHORT = [
