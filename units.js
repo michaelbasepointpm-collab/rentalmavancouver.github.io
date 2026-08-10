@@ -18,11 +18,7 @@
   ];
   var UNITS_SHORT = [
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" },
-    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
-    { num: 270, rent: 1995, videoId: "CUQlwEY_tBI", notes: [
-      { text: "Application in progress", kind: "status" },
-      { text: "Similar unit video" }
-    ] }
+    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" }
   ];
   var UNITS = UNITS_STANDARD.concat(UNITS_SHORT); // combined, for currency + schema
 
