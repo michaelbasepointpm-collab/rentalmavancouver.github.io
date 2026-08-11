@@ -13,12 +13,20 @@
      to show the Coming Soon image. Optional per unit: note + noteKind:"status"
      for a single label, or notes: [{text, kind}] for several stacked labels.
      ------------------------------------------------------------------ */
-  var UNITS = [
+  // Regular available studios (standard lease).
+  var UNITS_AVAILABLE = [
+    { num: 658, rent: 1841, videoId: "" },
+    { num: 671, rent: 1747, videoId: "" },
+    { num: 670, rent: 1745, videoId: "" },
+    { num: 466, rent: 1635, videoId: "" }
+  ];
+  // Short-term studios: minimum 4 months, or 2 months free on a 13-month lease.
+  var UNITS_SHORT = [
     { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" },
     { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
-    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" },
-    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" }
+    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" }
   ];
+  var UNITS = UNITS_AVAILABLE.concat(UNITS_SHORT); // combined, for currency + schema
 
   var CALENDLY_URL = "https://calendly.com/basepointpm/alma-gastown";
   var APPLY_EMAIL = "michael@basepointpm.com";
@@ -136,6 +144,7 @@
 
   /* ---- Render ------------------------------------------------------- */
   var grid = document.getElementById("unit-grid");
+  var shortGrid = document.getElementById("unit-grid-short");
   var status = document.getElementById("unit-status");
   var sortSelect = document.getElementById("sort");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -154,7 +163,7 @@
 
   function render(sortKey) {
     if (!grid) return;
-    var list = UNITS.slice().sort(SORTERS[sortKey] || SORTERS.affordable);
+    var list = UNITS_AVAILABLE.slice().sort(SORTERS[sortKey] || SORTERS.affordable);
     grid.innerHTML = list.map(cardHTML).join("");
 
     if (status) {
@@ -167,10 +176,19 @@
     if (activeCurrency !== "CAD") paintPrices(activeCurrency);
   }
 
+  function renderShort() {
+    if (!shortGrid) return;
+    var list = UNITS_SHORT.slice().sort(SORTERS.affordable);
+    shortGrid.innerHTML = list.map(cardHTML).join("");
+    revealCards(shortGrid);
+    if (activeCurrency !== "CAD") paintPrices(activeCurrency);
+  }
+
   if (sortSelect) {
     sortSelect.addEventListener("change", function () { render(sortSelect.value); });
   }
   render(sortSelect ? sortSelect.value : "affordable");
+  renderShort();
 
   /* ---- Currency switcher wiring ------------------------------------- */
   document.querySelectorAll(".currency-btn").forEach(function (btn) {
