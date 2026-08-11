@@ -1,5 +1,5 @@
 /* =====================================================================
-   ALMA — main.js
+   ALMA - main.js
    Progressive enhancement only. The page is fully usable with JS off.
    All motion respects prefers-reduced-motion and animates transform/
    opacity only (Emil rules). Pointer-fine checks keep effects off touch.

@@ -7,9 +7,9 @@ This is a **new, standalone project** (unrelated to any other site in this accou
 
 ## Project rules
 
-All working rules — persona, Emil Kowalski design philosophy, the Graphify-first workflow,
+All working rules - persona, Emil Kowalski design philosophy, the Graphify-first workflow,
 ALMA branding (palette + typography), the "Grill me on ALMA" command, and operational
-constraints — live in [`CLAUDE.md`](CLAUDE.md).
+constraints - live in [`CLAUDE.md`](CLAUDE.md).
 
 ## Skills (`.claude/skills/`)
 
@@ -22,18 +22,18 @@ constraints — live in [`CLAUDE.md`](CLAUDE.md).
 | `seo` | Falsifiable SEO audit + internal-linking checklist. |
 | `grill-me` | One-question-at-a-time stress-test interview. |
 
-Custom command: **`/grill-me-on-alma`** — quizzes you about the repo, UI, architecture,
+Custom command: **`/grill-me-on-alma`** - quizzes you about the repo, UI, architecture,
 accessibility, performance, and leasing strategy.
 
 ## Status
 
 - [x] Workspace + local git initialized
 - [x] Skills + CLAUDE.md + command authored
-- [x] Single-page site built (`index.html` + `styles.css` + `main.js` + `units.js`) — verified, WCAG AA
+- [x] Single-page site built (`index.html` + `styles.css` + `main.js` + `units.js`) - verified, WCAG AA
 - [x] Available units (sortable), promotions, common areas, neighbourhood, in-page video modal,
       Apply (mailto), Book a tour (Calendly)
 - [x] `GRAPH_REPORT.md` generated from real code
-- [ ] GitHub remote (deferred — local git only for now)
+- [ ] GitHub remote (deferred - local git only for now)
 - [ ] Real video IDs (set `videoId` per unit in `units.js`)
 - [ ] Real fonts + photography (drop into `assets/`, no code change needed)
 

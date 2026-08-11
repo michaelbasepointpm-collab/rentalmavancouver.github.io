@@ -1,5 +1,5 @@
 /* =====================================================================
-   ALMA — styles.css
+   ALMA - styles.css
    Design system + layout + components for the homepage.
    Built to the project's CLAUDE.md: Emil motion rules, Impeccable
    anti-slop rules, WCAG AA contrast, deliberate token scales.
@@ -296,7 +296,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 }
 .brand .dot { color: var(--alma-orange); }
 
-/* Pill nav group — clearly framed, not floating text */
+/* Pill nav group - clearly framed, not floating text */
 .nav-links {
   display: flex; align-items: center; gap: 2px;
   background: rgba(16, 16, 16, 0.045);
@@ -362,7 +362,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .section-head { display: flex; justify-content: space-between; align-items: end; gap: var(--sp-6); margin-bottom: var(--sp-12); flex-wrap: wrap; }
 .section-head h2 { font-size: var(--fs-500); }
 
-/* Residences — intentionally varied rhythm (no uniform card wall) */
+/* Residences - intentionally varied rhythm (no uniform card wall) */
 .residences { background: var(--surface); }
 .res-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-6); }
 .res-card { position: relative; display: flex; flex-direction: column; border-radius: var(--r-lg); overflow: hidden; background: var(--ivory); box-shadow: var(--shadow-1); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
@@ -383,7 +383,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .res-link .arrow { transition: transform var(--dur) var(--ease-out); }
 .res-card:hover .res-link .arrow { transform: translateX(4px); }
 
-/* Amenities — navy + icon grid */
+/* Amenities - navy + icon grid */
 .amenities { background: var(--navy); color: var(--white); }
 .am-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sp-8); margin-top: var(--sp-12); }
 .am-item { display: flex; flex-direction: column; gap: var(--sp-3); padding-top: var(--sp-6); border-top: 1px solid var(--line-on-dark); }
@@ -391,7 +391,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .am-item h3 { font-size: var(--fs-200); }
 .am-item p { color: rgba(255,255,255,0.7); font-size: var(--fs-100); }
 
-/* Neighbourhood — asymmetric, taupe */
+/* Neighbourhood - asymmetric, taupe */
 .hood { background: var(--taupe); color: var(--ink); }
 .hood .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-16); align-items: center; }
 .hood-media { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; border-radius: var(--r-lg); background: linear-gradient(160deg, #9fb3c9, var(--navy)); box-shadow: var(--shadow-2); }
@@ -455,7 +455,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 }
 
 /* ---------------------------------------------------------------------
-   12. Reduced motion — replace movement with instant/opacity only.
+   12. Reduced motion - replace movement with instant/opacity only.
    --------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -500,11 +500,8 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   background-repeat: no-repeat; background-position: right var(--sp-4) center;
 }
 
-/* Units grid — floating-gradient-header cards */
+/* Units grid - floating-gradient-header cards */
 .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--sp-2) var(--sp-6); padding-top: 28px; }
-.short-term-head { margin-top: var(--sp-16); }
-.short-term-head h2 { font-size: var(--fs-500); }
-.short-term-head .lede { margin-top: var(--sp-2); }
 .unit-card {
   position: relative; display: flex; flex-direction: column; margin-top: 28px;
   background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--shadow-1);
@@ -554,35 +551,27 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .unit-actions { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-4); }
 .unit-actions > * { width: 100%; }
 
-/* Promotions — flip cards (adapted from Uiverse/Dailleer), ALMA palette */
-.promos { background: var(--mint); color: var(--ink); }
-.promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 360px)); gap: var(--sp-6); margin-top: var(--sp-8); justify-content: center; }
-.promo-card {
-  position: relative; width: 100%; height: 220px; border-radius: var(--r-lg);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-  transition: box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+/* Move-in offers - bold orange full-bleed band with two option cards */
+.offers { background: var(--alma-orange); color: var(--ink); }
+.offers .eyebrow { color: var(--ink); }
+.offers h2 { font-size: var(--fs-600); max-width: 16ch; }
+.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); margin-top: var(--sp-12); }
+.offer-card {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-8); border-radius: var(--r-lg); box-shadow: var(--shadow-2);
 }
-.promo-card.free { background: var(--navy) url("assets/images/promos/one-month-free.jpg") center/cover; }
-.promo-card.compass { background: var(--alma-blue) url("assets/images/promos/zone1.jpg") center/cover; }
-.promo-card.free > svg, .promo-card.compass > svg { display: none; } /* the artwork is the visual */
-.promo-card > svg { width: 52px; height: 52px; fill: #fff; transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-.promo-card:hover { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
-.promo-card__content {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);
-  width: 100%; height: 100%; padding: var(--sp-6); box-sizing: border-box; background: #fff;
-  opacity: 0; transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  display: flex; flex-direction: column; justify-content: center;
-}
-.promo-card:hover .promo-card__content { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
-.promo-card:hover > svg { scale: 0; transform: rotate(-45deg); }
-.promo-card__title { margin: 0; font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-300); color: var(--ink); }
-.promo-card__description { margin: var(--sp-2) 0 0; font-size: var(--fs-100); color: var(--text-muted); line-height: 1.45; }
-.promo-note { margin-top: var(--sp-6); font-size: var(--fs-100); color: var(--ink-70); }
+.offer-card--free { background: var(--navy); color: #fff; }
+.offer-card--flex { background: var(--white); color: var(--ink); }
+.offer-kicker { font-size: var(--fs-50); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; opacity: 0.7; }
+.offer-title { font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-500); line-height: 1; }
+.offer-card--free .offer-title { color: #ffd401; } /* gold pop for the 2-months-free */
+.offer-desc { font-size: var(--fs-200); line-height: 1.5; }
+.offer-card--free .offer-desc { color: rgba(255, 255, 255, 0.88); }
+.offer-card--flex .offer-desc { color: var(--text-muted); }
+.offer-note { margin-top: var(--sp-8); font-size: var(--fs-100); color: rgba(16, 16, 16, 0.78); }
 
-/* Touch devices have no hover: show the promo details by default (and hide the icon). */
-@media (hover: none) {
-  .promo-card > svg { display: none; }
-  .promo-card__content { opacity: 1; transform: translate(-50%, -50%) rotate(0deg); }
+@media (max-width: 760px) {
+  .offer-grid { grid-template-columns: 1fr; }
 }
 
 /* Common areas gallery */

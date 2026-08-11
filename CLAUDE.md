@@ -1,10 +1,10 @@
-# ALMA Website — Project Context & Operating Rules
+# ALMA Website - Project Context & Operating Rules
 
 This file governs how Claude works on the ALMA website. These instructions OVERRIDE default
 behavior. Follow them exactly.
 
 ALMA is a **high-end rental housing** brand. The site must feel premium, youthful, and
-crafted — never templated or "AI-generated."
+crafted - never templated or "AI-generated."
 
 ---
 
@@ -15,7 +15,7 @@ craft. You push back on generic choices, you justify decisions from first princi
 hold the work to a production-ready bar. You would rather remove something than ship something
 mediocre.
 
-## 2. Design philosophy — Emil Kowalski design engineering
+## 2. Design philosophy - Emil Kowalski design engineering
 
 Follow Emil Kowalski's design-engineering principles (encoded in the `emil-design-eng` skill):
 
@@ -27,7 +27,7 @@ Follow Emil Kowalski's design-engineering principles (encoded in the `emil-desig
 - **Performance**: stay on the compositor, 60fps, preload critical fonts, protect LCP/CLS/INP.
 - **Production-ready frontend craft**: optical alignment, deliberate spacing/type/radius scales.
 
-## 3. Mandatory workflow — Graphify first
+## 3. Mandatory workflow - Graphify first
 
 **Before proposing or making ANY architectural or design improvement, run the `graphify`
 skill and read the resulting `GRAPH_REPORT.md`.** Treat that report as the shared source of
@@ -49,7 +49,7 @@ hex, throughout.
 
 | Colour | Hex | Role |
 |---|---|---|
-| ALMA blue | `#0072CE` (deep) / `#4981D8` (bright) | Primary brand — logo, links, accents |
+| ALMA blue | `#0072CE` (deep) / `#4981D8` (bright) | Primary brand - logo, links, accents |
 | Bright orange | `#FA4616` | High-energy accent, CTAs, highlights |
 | Mint / light green | `#E3EFCE` | Soft background, lifestyle/community feel |
 | Taupe / beige | `#CABFA5` | Warm neutral section background |
@@ -71,7 +71,7 @@ Always verify text/background pairings meet **WCAG AA** contrast before shipping
 Rules: preload the two `.woff2` files; use `font-display: swap`; large confident display type
 with strong size contrast to body; comfortable body measure (~60–75ch).
 
-## 5. Custom command — "Grill me on ALMA"
+## 5. Custom command - "Grill me on ALMA"
 
 When the user types **"Grill me on ALMA"** (or runs `/grill-me-on-alma`), quiz them **one
 question at a time** about: the repository, UI decisions, architecture, accessibility,
@@ -102,12 +102,12 @@ difficulty, grounded in the real repo. See `.claude/commands/grill-me-on-alma.md
 
 ## 8. Installed skills (`.claude/skills/`)
 
-- `graphify` — architecture map → `GRAPH_REPORT.md` (run first).
-- `emil-design-eng` — motion & component craft.
-- `taste` — variance / motion / density dials to escape boilerplate.
-- `impeccable` — 14+ anti-"AI-slop" detector rules + audit/critique/polish modes.
-- `seo` — falsifiable, primary-source SEO audit & internal-linking checklist.
-- `grill-me` — relentless one-question-at-a-time interview method.
+- `graphify` - architecture map → `GRAPH_REPORT.md` (run first).
+- `emil-design-eng` - motion & component craft.
+- `taste` - variance / motion / density dials to escape boilerplate.
+- `impeccable` - 14+ anti-"AI-slop" detector rules + audit/critique/polish modes.
+- `seo` - falsifiable, primary-source SEO audit & internal-linking checklist.
+- `grill-me` - relentless one-question-at-a-time interview method.
 
 ## 9. Definition of done
 
