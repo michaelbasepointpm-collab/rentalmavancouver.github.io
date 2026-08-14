@@ -22,6 +22,7 @@
   ];
   // Short-term studios: minimum 4 months, or 2 months free on a 13-month lease.
   var UNITS_SHORT = [
+    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" },
     { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" },
     { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" }
