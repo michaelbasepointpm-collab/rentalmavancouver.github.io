@@ -15,10 +15,10 @@
      ------------------------------------------------------------------ */
   // Regular available studios (standard lease).
   var UNITS_AVAILABLE = [
-    { num: 658, rent: 1841, videoId: "" },
-    { num: 671, rent: 1747, videoId: "" },
-    { num: 670, rent: 1745, videoId: "" },
-    { num: 466, rent: 1635, videoId: "" }
+    { num: 658, rent: 1841, videoId: "", note: "Furniture setup in progress", noteKind: "status" },
+    { num: 671, rent: 1747, videoId: "", note: "Furniture setup in progress", noteKind: "status" },
+    { num: 670, rent: 1745, videoId: "YhDJ9G5qU_U", note: "Furniture setup in progress", noteKind: "status" },
+    { num: 466, rent: 1635, videoId: "HwE5T3nTskE", note: "Furniture setup in progress", noteKind: "status" }
   ];
   // Short-term studios: minimum 4 months, or 2 months free on a 13-month lease.
   var UNITS_SHORT = [
