@@ -15,12 +15,9 @@
      ------------------------------------------------------------------ */
   // Regular available studios (standard lease).
   var UNITS_AVAILABLE = [
-    { num: 658, rent: 1841, videoId: "", note: "Furniture setup in progress", noteKind: "status" },
-    { num: 671, rent: 1747, videoId: "", note: "Furniture setup in progress", noteKind: "status" },
-    { num: 670, rent: 1745, videoId: "YhDJ9G5qU_U", note: "Furniture setup in progress", noteKind: "status" },
-    { num: 466, rent: 1635, videoId: "HwE5T3nTskE", note: "Furniture setup in progress", noteKind: "status" }
+    { num: 670, rent: 1745, videoId: "YhDJ9G5qU_U", note: "Furniture setup in progress", noteKind: "status" }
   ];
-  // Short-term studios: minimum 4 months, or 2 months free on a 13-month lease.
+  // Flexible-lease studios: flexible terms, or 2 months free on a 10-month minimum lease.
   var UNITS_SHORT = [
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" },
     { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" },
@@ -169,7 +166,8 @@
 
     if (status) {
       var labels = { affordable: "most affordable first", highest: "highest price first", unit: "by unit number" };
-      status.textContent = list.length + " studios available, sorted " + (labels[sortKey] || labels.affordable) + ".";
+      status.textContent = list.length + (list.length === 1 ? " studio" : " studios") +
+        " available, sorted " + (labels[sortKey] || labels.affordable) + ".";
     }
     revealCards(grid);
 
