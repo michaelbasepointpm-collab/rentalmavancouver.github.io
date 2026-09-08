@@ -15,9 +15,7 @@
      ------------------------------------------------------------------ */
   // Regular available studios (standard lease).
   var UNITS_AVAILABLE = [
-    { num: 670, rent: 1745, videoId: "YhDJ9G5qU_U", note: "Furniture setup in progress", noteKind: "status" },
-    { num: 452, rent: 1662, videoId: "zrJcQG6AcMk" },
-    { num: 455, rent: 1841, videoId: "3TZU9nc_ku0" }
+    { num: 452, rent: 1662, videoId: "zrJcQG6AcMk" }
   ];
   // Flexible-lease studios: flexible terms, or 2 months free on a 10-month minimum lease.
   var UNITS_SHORT = [
