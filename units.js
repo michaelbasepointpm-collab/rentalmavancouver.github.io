@@ -8,26 +8,21 @@
   "use strict";
 
   /* ------------------------------------------------------------------
-     DATA - edit this list as availability changes.
-     videoId = the part after "/embed/" (or "v=") in the YouTube URL; leave ""
-     to show the Coming Soon image. Optional per unit: note + noteKind:"status"
-     for a single label, or notes: [{text, kind}] for several stacked labels.
+     DATA - one inventory. Flags drive the card badges and the filter chips:
+       videoId : part after "/embed/" in the YouTube URL; "" shows Coming Soon.
+       flexible: shorter lease terms available at the regular monthly rate.
+       promo   : 2 months free (first + last month) on a 1-year lease.
+       notes   : extra badge(s), e.g. a fixed "12-month lease" label.
      ------------------------------------------------------------------ */
-  // Regular available studios (standard lease).
-  var UNITS_AVAILABLE = [
-    { num: 259, rent: 1891, videoId: "TFIJ13MzCug" },
-    { num: 452, rent: 1662, videoId: "zrJcQG6AcMk" },
-    { num: 562, rent: 1637, videoId: "w0TMDwkY5Ow" },
-    { num: 554, rent: 1688, videoId: "", note: "Soon available", noteKind: "status" }
+  var UNITS = [
+    { num: 257, rent: 2143, videoId: "GGVqKGkBtXw", flexible: true, promo: true },
+    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M", flexible: true, promo: true },
+    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU", flexible: true, promo: true },
+    { num: 351, rent: 2020, videoId: "", flexible: true, promo: true },
+    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM", flexible: true, promo: true },
+    { num: 361, rent: 1950, videoId: "", flexible: true, promo: true },
+    { num: 554, rent: 1688, videoId: "w0TMDwkY5Ow", notes: [{ text: "12-month lease" }] }
   ];
-  // Flexible-lease studios: flexible terms, or 2 months free on a 10-month minimum lease.
-  var UNITS_SHORT = [
-    { num: 364, rent: 1995, videoId: "8OgAuV5E0AM" },
-    { num: 257, rent: 2143, videoId: "GGVqKGkBtXw" },
-    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M" },
-    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU" }
-  ];
-  var UNITS = UNITS_AVAILABLE.concat(UNITS_SHORT); // combined, for currency + schema
 
   var CALENDLY_URL = "https://calendly.com/basepointpm/alma-gastown";
   var APPLY_EMAIL = "michael@basepointpm.com";
@@ -54,11 +49,8 @@
     document.querySelectorAll(".money").forEach(function (m) {
       m.textContent = formatMoney(Number(m.dataset.cad), currency, rate);
     });
-    document.querySelectorAll(".currency-btn").forEach(function (b) {
-      var on = b.dataset.currency === currency;
-      b.classList.toggle("active", on);
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-    });
+    var sel = document.getElementById("currency");
+    if (sel && sel.value !== currency) sel.value = currency;
   }
 
   // Select + convert immediately (never blocked by the network).
@@ -117,16 +109,22 @@
 
     var calendarSvg = '<svg viewBox="0 0 448 512" aria-hidden="true"><path d="M128 0c13.3 0 24 10.7 24 24V64H296V24c0-13.3 10.7-24 24-24s24 10.7 24 24V64h40c35.3 0 64 28.7 64 64v16 48V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192 144 128C0 92.7 28.7 64 64 64h40V24c0-13.3 10.7-24 24-24zM400 192H48V448c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V192zM64 112c-8.8 0-16 7.2-16 16v16H400V128c0-8.8-7.2-16-16-16H64z"/></svg>';
 
-    // A unit can carry one or more labels: use `notes: [{text, kind}]`, or a single `note`.
-    var notes = u.notes || (u.note ? [{ text: u.note, kind: u.noteKind }] : []);
-    var noteBadge = notes.length
-      ? '<div class="unit-notes">' + notes.map(function (n) {
+    // Badges from flags, plus any explicit notes. "2 months free" is the gold
+    // (status) highlight; "Flexible" and fixed notes use the neutral pill.
+    var badges = [];
+    if (u.promo) badges.push({ text: "2 months free", kind: "status" });
+    if (u.flexible) badges.push({ text: "Flexible" });
+    if (u.notes) badges = badges.concat(u.notes);
+    if (u.note) badges.push({ text: u.note, kind: u.noteKind });
+    var noteBadge = badges.length
+      ? '<div class="unit-notes">' + badges.map(function (n) {
           return '<span class="unit-note' + (n.kind === "status" ? " unit-note--status" : "") + '">' + n.text + "</span>";
         }).join("") + "</div>"
       : "";
 
     return '' +
-      '<article class="unit-card reveal" aria-labelledby="unit-' + u.num + '-title">' +
+      '<article class="unit-card reveal" data-flexible="' + (u.flexible ? "1" : "0") +
+        '" data-promo="' + (u.promo ? "1" : "0") + '" aria-labelledby="unit-' + u.num + '-title">' +
         '<div class="unit-media" ' + thumb + ' role="img" aria-label="ALMA studio unit ' + u.num + '">' +
           noteBadge +
           mediaInner +
@@ -143,12 +141,13 @@
       "</article>";
   }
 
-  /* ---- Render ------------------------------------------------------- */
+  /* ---- Render + filter ---------------------------------------------- */
   var grid = document.getElementById("unit-grid");
-  var shortGrid = document.getElementById("unit-grid-short");
   var status = document.getElementById("unit-status");
   var sortSelect = document.getElementById("sort");
+  var currencySelect = document.getElementById("currency");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var activeFilter = "all";
 
   function revealCards(gridEl) {
     var cards = gridEl.querySelectorAll(".reveal");
@@ -162,40 +161,58 @@
     }
   }
 
-  function render(sortKey) {
+  function applyFilter(f) {
     if (!grid) return;
-    var list = UNITS_AVAILABLE.slice().sort(SORTERS[sortKey] || SORTERS.affordable);
-    grid.innerHTML = list.map(cardHTML).join("");
-
+    activeFilter = f;
+    var shown = 0;
+    grid.querySelectorAll(".unit-card").forEach(function (c) {
+      var ok = f === "all" ||
+        (f === "flexible" && c.dataset.flexible === "1") ||
+        (f === "promo" && c.dataset.promo === "1");
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    document.querySelectorAll(".filter-btn").forEach(function (b) {
+      var on = b.dataset.filter === f;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
     if (status) {
-      var labels = { affordable: "most affordable first", highest: "highest price first", unit: "by unit number" };
-      status.textContent = list.length + (list.length === 1 ? " studio" : " studios") +
-        " available, sorted " + (labels[sortKey] || labels.affordable) + ".";
+      status.textContent = shown + (shown === 1 ? " studio" : " studios") +
+        (f === "all" ? " available." : " shown.");
     }
-    revealCards(grid);
-
-    // Keep the selected currency after a re-sort (spans were rebuilt).
-    if (activeCurrency !== "CAD") paintPrices(activeCurrency);
   }
 
-  function renderShort() {
-    if (!shortGrid) return;
-    var list = UNITS_SHORT.slice().sort(SORTERS.affordable);
-    shortGrid.innerHTML = list.map(cardHTML).join("");
-    revealCards(shortGrid);
+  function render(sortKey) {
+    if (!grid) return;
+    var list = UNITS.slice().sort(SORTERS[sortKey] || SORTERS.affordable);
+    grid.innerHTML = list.map(cardHTML).join("");
+    revealCards(grid);
     if (activeCurrency !== "CAD") paintPrices(activeCurrency);
+    applyFilter(activeFilter); // re-apply the active filter + refresh the count
   }
 
   if (sortSelect) {
     sortSelect.addEventListener("change", function () { render(sortSelect.value); });
   }
   render(sortSelect ? sortSelect.value : "affordable");
-  renderShort();
 
-  /* ---- Currency switcher wiring ------------------------------------- */
-  document.querySelectorAll(".currency-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () { changeCurrency(btn.dataset.currency); });
+  /* ---- Filter chips + promo-banner CTA (event delegation) ----------- */
+  document.addEventListener("click", function (e) {
+    var fb = e.target.closest && e.target.closest("[data-filter]");
+    if (!fb) return;
+    e.preventDefault();
+    applyFilter(fb.getAttribute("data-filter"));
+    if (fb.classList.contains("promo-banner__cta")) {
+      var sec = document.getElementById("units");
+      if (sec) sec.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    }
   });
+
+  /* ---- Currency wiring ---------------------------------------------- */
+  if (currencySelect) {
+    currencySelect.addEventListener("change", function () { changeCurrency(currencySelect.value); });
+  }
   refreshRates(); // upgrade fallback estimates to live rates when reachable
 
   /* ---- SEO: inject ItemList JSON-LD from the same data (no drift) ---- */

@@ -486,9 +486,20 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 }
 .feature-strip li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-on-dark); }
 
-/* Sort bar */
-.units-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-8); }
-.units-bar .count { color: var(--text-muted); font-size: var(--fs-50); letter-spacing: 0.04em; text-transform: uppercase; }
+/* Studios head, promo banner, filters + sort/currency controls */
+.units-head { margin-bottom: var(--sp-8); }
+.count { color: var(--text-muted); font-size: var(--fs-50); letter-spacing: 0.04em; text-transform: uppercase; margin-top: var(--sp-6); }
+.promo-banner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; background: var(--navy); color: #fff; padding: var(--sp-4) var(--sp-6); border-radius: var(--r-md); margin-bottom: var(--sp-6); }
+.promo-banner__text { font-size: var(--fs-100); }
+.promo-banner__text strong { color: #ffd401; }
+.promo-banner__cta { border: none; background: #ffd401; color: var(--ink); font-weight: 700; font-size: var(--fs-50); letter-spacing: 0.04em; text-transform: uppercase; padding: 10px 16px; border-radius: var(--r-pill); cursor: pointer; white-space: nowrap; transition: transform var(--dur-fast) var(--ease-out); }
+.promo-banner__cta:hover { transform: translateY(-1px); }
+.units-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-6); }
+.units-controls__right { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
+.unit-filters { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 5px; background: rgba(16,16,16,0.045); border: 1px solid var(--line); border-radius: var(--r-pill); }
+.filter-btn { border: none; padding: 9px 16px; border-radius: var(--r-pill); background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
+.filter-btn:hover { color: var(--ink); background: var(--white); }
+.filter-btn.active { background: var(--ink); color: #fff; }
 .sort { display: inline-flex; align-items: center; gap: var(--sp-3); }
 .sort label { font-size: var(--fs-50); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
 .sort select {
@@ -532,49 +543,17 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .unit-price .money { font-family: var(--font-display); }
 .unit-price .per { font-family: var(--font-body); color: var(--text-muted); font-size: var(--fs-50); }
 
-/* Currency switcher */
-.currency-row { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-6); }
-.currency-row .cur-label { font-size: var(--fs-50); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-.currency-row .cur-note { font-size: var(--fs-50); color: var(--text-muted); width: 100%; }
-.currency-switcher {
-  display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px;
-  background: rgba(16, 16, 16, 0.045); border: 1px solid var(--line);
-  border-radius: var(--r-lg); max-width: 100%;
-}
-.currency-btn {
-  border: none; padding: 8px 14px; border-radius: var(--r-pill);
-  background: transparent; color: var(--text-muted);
-  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; cursor: pointer;
-  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
-  white-space: nowrap;
-}
-.currency-btn:hover { background: var(--white); color: var(--ink); }
-.currency-btn.active { background: var(--ink); color: #fff; box-shadow: var(--shadow-1); }
 .unit-actions { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-4); }
 .unit-actions > * { width: 100%; }
 
-/* Move-in offers - bold orange full-bleed band with two option cards */
-.offers { background: var(--alma-orange); color: var(--ink); }
-.offers .eyebrow { color: var(--ink); }
-.offers h2 { font-size: var(--fs-600); max-width: 16ch; }
-.offers-sub { margin-top: var(--sp-4); font-size: var(--fs-200); color: rgba(16, 16, 16, 0.82); max-width: 52ch; }
-.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); margin-top: var(--sp-12); }
-.offer-card {
-  display: flex; flex-direction: column; gap: var(--sp-3);
-  padding: var(--sp-8); border-radius: var(--r-lg); box-shadow: var(--shadow-2);
-}
-.offer-card--free { background: var(--navy); color: #fff; }
-.offer-card--flex { background: var(--white); color: var(--ink); }
-.offer-kicker { font-size: var(--fs-50); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; opacity: 0.7; }
-.offer-title { font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-500); line-height: 1; }
-.offer-card--free .offer-title { color: #ffd401; } /* gold pop for the 2-months-free */
-.offer-desc { font-size: var(--fs-200); line-height: 1.5; }
-.offer-card--free .offer-desc { color: rgba(255, 255, 255, 0.88); }
-.offer-card--flex .offer-desc { color: var(--text-muted); }
-.offer-note { margin-top: var(--sp-8); font-size: var(--fs-100); color: rgba(16, 16, 16, 0.78); }
+/* Lease options explainer (below the one inventory) */
+.lease-options { margin-top: var(--sp-16); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8) var(--sp-12); padding: var(--sp-12); background: var(--mint); border-radius: var(--r-lg); }
+.lease-option h3 { font-size: var(--fs-300); }
+.lease-option p { margin-top: var(--sp-2); color: var(--ink-70); line-height: 1.5; }
+.lease-disclaimer { grid-column: 1 / -1; margin: 0; font-size: var(--fs-50); color: var(--ink-70); border-top: 1px solid rgba(16, 16, 16, 0.12); padding-top: var(--sp-4); }
 
 @media (max-width: 760px) {
-  .offer-grid { grid-template-columns: 1fr; }
+  .lease-options { grid-template-columns: 1fr; padding: var(--sp-8); }
 }
 
 /* Common areas gallery */

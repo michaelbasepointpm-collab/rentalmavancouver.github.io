@@ -69,8 +69,7 @@
       <a class="brand" href="#top" aria-label="ALMA home">ALMA<span class="dot">.</span></a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="#units">Available units</a>
-        <a href="#offers">Flexible leasing</a>
+        <a href="#units">Studios</a>
         <a href="#common-areas">Common areas</a>
         <a href="#neighbourhood">Neighbourhood</a>
         <a href="#contact">Contact</a>
@@ -88,8 +87,7 @@
     </div>
 
     <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
-      <a href="#units">Available units</a>
-      <a href="#offers">Flexible leasing</a>
+      <a href="#units">Studios</a>
       <a href="#common-areas">Common areas</a>
       <a href="#neighbourhood">Neighbourhood</a>
       <a href="#contact">Contact</a>
@@ -115,7 +113,7 @@
           thoughtful homes with generous light, keyless entry, and a pet-free building.
         </p>
         <div class="hero-actions reveal">
-          <span class="magnetic"><a class="btn btn-primary" href="#units">View available units</a></span>
+          <span class="magnetic"><a class="btn btn-primary" href="#units">View studios</a></span>
           <button class="btn-tour js-tour">
             <span class="text">Book a tour</span>
             <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M128 0c13.3 0 24 10.7 24 24V64H296V24c0-13.3 10.7-24 24-24s24 10.7 24 24V64h40c35.3 0 64 28.7 64 64v16 48V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192 144 128C0 92.7 28.7 64 64 64h40V24c0-13.3 10.7-24 24-24zM400 192H48V448c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V192zM64 112c-8.8 0-16 7.2-16 16v16H400V128c0-8.8-7.2-16-16-16H64z"/></svg>
@@ -138,81 +136,72 @@
       </div>
     </section>
 
-    <!-- ============ Available units (regular) ============ -->
+    <!-- ============ Studios (one inventory) ============ -->
     <section class="residences section" id="units" aria-labelledby="grid-title">
       <div class="container">
-        <div class="units-bar">
-          <div>
-            <p class="eyebrow">The homes</p>
-            <h2 class="display" id="grid-title" style="font-size: var(--fs-500)">Available studios</h2>
-            <p class="lease-note"><strong>12-month minimum lease.</strong> Choose from our available studios for a traditional one-year tenancy.</p>
-          </div>
-          <div class="sort">
-            <label for="sort">Sort by</label>
-            <select id="sort" aria-label="Sort units">
-              <option value="affordable">Most affordable</option>
-              <option value="highest">Highest price</option>
-              <option value="unit">Unit number</option>
-            </select>
-          </div>
+        <div class="units-head reveal">
+          <p class="eyebrow">The studios</p>
+          <h2 class="display" id="grid-title" style="font-size: var(--fs-500)">Available studios</h2>
+          <p class="lease-note">Furnished, move-in ready studios in Gastown. Lease options vary by studio.</p>
         </div>
 
-        <div class="currency-row">
-          <span class="cur-label">Show prices in</span>
-          <div class="currency-switcher" role="group" aria-label="Display currency">
-            <button class="currency-btn active" data-currency="CAD" aria-pressed="true">CAD</button>
-            <button class="currency-btn" data-currency="USD" aria-pressed="false">USD</button>
-            <button class="currency-btn" data-currency="EUR" aria-pressed="false">EUR</button>
-            <button class="currency-btn" data-currency="GBP" aria-pressed="false">GBP</button>
-            <button class="currency-btn" data-currency="BRL" aria-pressed="false">BRL</button>
-            <button class="currency-btn" data-currency="CNY" aria-pressed="false">CNY</button>
+        <!-- Promo banner -->
+        <div class="promo-banner reveal">
+          <span class="promo-banner__text"><strong>Limited-time offer:</strong> 2 months free on select studios with a one-year lease.</span>
+          <button class="promo-banner__cta" data-filter="promo">See eligible studios</button>
+        </div>
+
+        <!-- Controls -->
+        <div class="units-controls">
+          <div class="unit-filters" role="group" aria-label="Filter studios">
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" data-filter="flexible" aria-pressed="false">Flexible</button>
+            <button class="filter-btn" data-filter="promo" aria-pressed="false">2 months free</button>
           </div>
-          <span class="cur-note">Estimates only; rent is billed in CAD.</span>
+          <div class="units-controls__right">
+            <div class="sort">
+              <label for="sort">Sort</label>
+              <select id="sort" aria-label="Sort studios">
+                <option value="affordable">Lowest price</option>
+                <option value="highest">Highest price</option>
+                <option value="unit">Unit number</option>
+              </select>
+            </div>
+            <div class="sort">
+              <label for="currency">Currency</label>
+              <select id="currency" aria-label="Display currency">
+                <option value="CAD">CAD</option>
+                <option value="USD">USD</option>
+                <option value="CNY">CNY</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="BRL">BRL</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <p id="unit-status" class="count" aria-live="polite"></p>
 
         <div class="unit-grid" id="unit-grid">
           <noscript>
-            <p>Please enable JavaScript to view and sort available units, or
+            <p>Please enable JavaScript to view and sort available studios, or
               <a href="mailto:michael@basepointpm.com">email our leasing team</a>.</p>
           </noscript>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ Flexible leasing (offers) ============ -->
-    <section class="offers section" id="offers" aria-labelledby="offers-title">
-      <div class="container">
-        <p class="eyebrow reveal">Flexible leasing</p>
-        <h2 class="display reveal" id="offers-title">Need a little more flexibility?</h2>
-        <p class="offers-sub reveal">Prefer a shorter commitment? Select ALMA studios are available on flexible lease terms.</p>
-        <div class="offer-grid reveal" data-stagger>
-          <article class="offer-card offer-card--flex">
-            <p class="offer-kicker">Flexible term</p>
-            <h3 class="offer-title">Flexible Lease</h3>
-            <p class="offer-desc">A shorter lease at the regular monthly rate. Ask us about the term that suits you.</p>
-          </article>
-          <article class="offer-card offer-card--free">
-            <p class="offer-kicker">Special offer</p>
-            <h3 class="offer-title">2 Months Free</h3>
-            <p class="offer-desc">Sign a lease of <strong>10 months or more</strong> and receive two months free.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Flexible Lease Studios ============ -->
-    <section class="residences section" id="flexible" aria-labelledby="flexible-title">
-      <div class="container">
-        <div class="section-head reveal" style="border:0">
-          <div>
-            <p class="eyebrow">Available now</p>
-            <h2 class="display" id="flexible-title" style="font-size: var(--fs-500)">Flexible Lease Studios</h2>
+        <!-- Lease options explainer -->
+        <div class="lease-options reveal">
+          <div class="lease-option">
+            <h3>Flexible when you need it</h3>
+            <p>Some ALMA studios are available for shorter lease terms at their regular monthly rent. Ask us about the term that suits you.</p>
           </div>
+          <div class="lease-option">
+            <h3>Stay longer, save more</h3>
+            <p>Sign a one-year lease on an eligible studio and receive two months free: your first and last month.</p>
+          </div>
+          <p class="lease-disclaimer">Eligible studios are marked above. Prices and promotions are subject to change. Errors and omissions excepted. Converted prices are estimates; rent is billed in CAD.</p>
         </div>
-        <div class="unit-grid" id="unit-grid-short" aria-labelledby="flexible-title"></div>
-        <p class="lease-note" style="max-width: 62ch; margin-top: var(--sp-8)">Flexible lease terms and promotional offers apply only to the studios listed in this section. Conditions apply.</p>
       </div>
     </section>
 
@@ -331,8 +320,7 @@
         </div>
         <div>
           <h3>Explore</h3>
-          <a href="#units">Available units</a>
-          <a href="#offers">Flexible leasing</a>
+          <a href="#units">Studios</a>
           <a href="#common-areas">Common areas</a>
           <a href="#neighbourhood">Neighbourhood</a>
         </div>
