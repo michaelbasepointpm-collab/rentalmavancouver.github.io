@@ -109,8 +109,9 @@
           Live <span class="accent">elevated</span>, not just somewhere
         </h1>
         <p class="lede reveal">
-          ALMA is a collection of design-forward studio rentals in Gastown, Vancouver:
-          thoughtful homes with generous light, keyless entry, and a pet-free building.
+          ALMA is a collection of design-forward single-occupancy studios in Gastown,
+          Vancouver: generous light, keyless entry, and a pet-free building, five minutes
+          from SkyTrain, buses, restaurants, Costco, grocery stores, and more.
         </p>
         <div class="hero-actions reveal">
           <span class="magnetic"><a class="btn btn-primary" href="#units">View studios</a></span>
@@ -118,20 +119,6 @@
             <span class="text">Book a tour</span>
             <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M128 0c13.3 0 24 10.7 24 24V64H296V24c0-13.3 10.7-24 24-24s24 10.7 24 24V64h40c35.3 0 64 28.7 64 64v16 48V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192 144 128C0 92.7 28.7 64 64 64h40V24c0-13.3 10.7-24 24-24zM400 192H48V448c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V192zM64 112c-8.8 0-16 7.2-16 16v16H400V128c0-8.8-7.2-16-16-16H64z"/></svg>
           </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Intro / value prop ============ -->
-    <section class="intro section" aria-labelledby="intro-title">
-      <div class="container grid">
-        <h2 class="display reveal" id="intro-title">A different standard of renting</h2>
-        <div class="reveal">
-          <p class="lede" style="color: var(--ink-70)">
-            Most rentals ask you to settle. ALMA does not. Every studio is finished with
-            considered materials, real storage, and quiet, efficient systems, so the building
-            works as well as it looks.
-          </p>
         </div>
       </div>
     </section>
@@ -253,13 +240,21 @@
           </p>
         </div>
 
-        <div class="gallery reveal" data-stagger>
-          <figure><img src="assets/images/common-areas/lobby.jpg" alt="ALMA lobby in Gastown" loading="lazy"><figcaption>Lobby</figcaption></figure>
-          <figure><img src="assets/images/common-areas/lounge.jpg" alt="ALMA resident lounge" loading="lazy"><figcaption>Resident lounge</figcaption></figure>
-          <figure><img src="assets/images/common-areas/gym.jpg" alt="ALMA fitness room" loading="lazy"><figcaption>Fitness room</figcaption></figure>
-          <figure><img src="assets/images/common-areas/entrance.jpg" alt="ALMA secure building entrance" loading="lazy"><figcaption>Secure entrance</figcaption></figure>
-          <figure><img src="assets/images/common-areas/mailroom.jpg" alt="ALMA mail and parcel area" loading="lazy"><figcaption>Mail and parcels</figcaption></figure>
-          <figure><img src="assets/images/common-areas/exterior.jpg" alt="ALMA building exterior in Gastown" loading="lazy"><figcaption>Building exterior</figcaption></figure>
+        <div class="carousel reveal" data-carousel>
+          <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous photos">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="carousel__track" tabindex="0" role="group" aria-label="Common area photos, scrollable">
+            <figure class="carousel__slide"><img src="assets/images/common-areas/lobby.jpg" alt="ALMA lobby in Gastown" loading="lazy"><figcaption>Lobby</figcaption></figure>
+            <figure class="carousel__slide"><img src="assets/images/common-areas/lounge.jpg" alt="ALMA resident lounge" loading="lazy"><figcaption>Resident lounge</figcaption></figure>
+            <figure class="carousel__slide"><img src="assets/images/common-areas/gym.jpg" alt="ALMA fitness room" loading="lazy"><figcaption>Fitness room</figcaption></figure>
+            <figure class="carousel__slide"><img src="assets/images/common-areas/entrance.jpg" alt="ALMA secure building entrance" loading="lazy"><figcaption>Secure entrance</figcaption></figure>
+            <figure class="carousel__slide"><img src="assets/images/common-areas/mailroom.jpg" alt="ALMA mail and parcel area" loading="lazy"><figcaption>Mail and parcels</figcaption></figure>
+            <figure class="carousel__slide"><img src="assets/images/common-areas/exterior.jpg" alt="ALMA building exterior in Gastown" loading="lazy"><figcaption>Building exterior</figcaption></figure>
+          </div>
+          <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next photos">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
       </div>
     </section>

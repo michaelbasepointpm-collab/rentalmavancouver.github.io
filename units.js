@@ -15,7 +15,6 @@
        notes   : extra badge(s), e.g. a fixed "12-month lease" label.
      ------------------------------------------------------------------ */
   var UNITS = [
-    { num: 257, rent: 2143, videoId: "GGVqKGkBtXw", flexible: true, promo: true },
     { num: 565, rent: 2046, videoId: "pP9hCHbYE6M", flexible: true, promo: true },
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU", flexible: true, promo: true },
     { num: 351, rent: 2020, videoId: "", flexible: true, promo: true },

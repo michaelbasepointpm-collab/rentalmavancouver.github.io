@@ -101,4 +101,19 @@
       });
     });
   }
+
+  /* ---- Carousel (prev/next advance one slide) ------------------------ */
+  document.querySelectorAll("[data-carousel]").forEach(function (car) {
+    var track = car.querySelector(".carousel__track");
+    if (!track) return;
+    var prev = car.querySelector(".carousel__btn--prev");
+    var next = car.querySelector(".carousel__btn--next");
+    function go(dir) {
+      var slide = track.querySelector(".carousel__slide");
+      var slideW = slide ? slide.getBoundingClientRect().width + 16 : track.clientWidth * 0.8; // + gap
+      track.scrollBy({ left: dir * slideW, behavior: "auto" });
+    }
+    if (prev) prev.addEventListener("click", function () { go(-1); });
+    if (next) next.addEventListener("click", function () { go(1); });
+  });
 })();

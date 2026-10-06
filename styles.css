@@ -521,6 +521,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
 .unit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+.unit-card[hidden] { display: none !important; } /* filter uses the hidden attribute */
 /* Header media floats up and inset, with a colored shadow (Material-style) */
 .unit-media {
   position: relative; margin: -28px 16px 0; height: 168px;
@@ -556,12 +557,32 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   .lease-options { grid-template-columns: 1fr; padding: var(--sp-8); }
 }
 
-/* Common areas gallery */
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--sp-4); margin-top: var(--sp-12); }
-.gallery figure { position: relative; margin: 0; border-radius: var(--r-md); overflow: hidden; aspect-ratio: 3 / 2; background: linear-gradient(150deg, var(--taupe), var(--stone, #b6a888)); box-shadow: var(--shadow-1); }
-.gallery figure img { width: 100%; height: 100%; object-fit: cover; }
-.gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--sp-6) var(--sp-4) var(--sp-3); color: var(--white); font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(to top, rgba(16,16,16,0.7), transparent); }
-.gallery .ph { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: rgba(16,16,16,0.5); font-size: var(--fs-50); letter-spacing: 0.08em; text-transform: uppercase; }
+/* Common areas carousel */
+.carousel { position: relative; margin-top: var(--sp-12); display: flex; align-items: center; gap: var(--sp-3); }
+.carousel__track {
+  display: flex; gap: var(--sp-4); overflow-x: auto; scroll-snap-type: x proximity;
+  padding: var(--sp-1) var(--sp-1) var(--sp-4);
+  flex: 1; min-width: 0; scrollbar-width: thin;
+}
+.carousel__track::-webkit-scrollbar { height: 8px; }
+.carousel__track::-webkit-scrollbar-thumb { background: var(--line); border-radius: var(--r-pill); }
+.carousel__slide {
+  position: relative; margin: 0; flex: 0 0 min(360px, 85vw); scroll-snap-align: start;
+  border-radius: var(--r-md); overflow: hidden; aspect-ratio: 3 / 2;
+  background: linear-gradient(150deg, var(--taupe), #b6a888); box-shadow: var(--shadow-1);
+}
+.carousel__slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel__slide figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--sp-6) var(--sp-4) var(--sp-3); color: var(--white); font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(to top, rgba(16,16,16,0.7), transparent); }
+.carousel__btn {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--white); color: var(--ink); border: 1px solid var(--line);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: var(--shadow-1); transition: background var(--dur) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.carousel__btn svg { width: 20px; height: 20px; }
+.carousel__btn:hover { background: var(--mint); }
+.carousel__btn:active { transform: scale(0.94); }
+@media (max-width: 680px) { .carousel__btn { display: none; } } /* swipe on touch */
 
 /* Video modal */
 .video-modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: var(--sp-6); }
