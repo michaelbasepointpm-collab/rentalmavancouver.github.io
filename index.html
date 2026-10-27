@@ -123,6 +123,14 @@
       </div>
     </section>
 
+    <!-- ============ Promo band ============ -->
+    <aside class="promo-band" aria-label="Current offer">
+      <div class="container promo-band__inner">
+        <p class="promo-band__text"><strong>2 months free</strong> on eligible studios with a 12-month lease.</p>
+        <a class="promo-band__cta" href="#units">See eligible studios</a>
+      </div>
+    </aside>
+
     <!-- ============ Studios (one inventory) ============ -->
     <section class="residences section" id="units" aria-labelledby="grid-title">
       <div class="container">
@@ -132,10 +140,20 @@
           <p class="lease-note">Furnished, move-in ready studios in Gastown. Lease options vary by studio.</p>
         </div>
 
-        <!-- Promo banner -->
-        <div class="promo-banner reveal">
-          <span class="promo-banner__text"><strong>Limited-time offer:</strong> 2 months free on select studios with a one-year lease.</span>
-          <button class="promo-banner__cta" data-filter="promo">See eligible studios</button>
+        <!-- Effective-rent calculator -->
+        <div class="rent-calc reveal" aria-labelledby="calc-title">
+          <div class="rent-calc__intro">
+            <p class="eyebrow">2 months free</p>
+            <h3 id="calc-title">See what you actually pay</h3>
+            <p class="rent-calc__sub">Eligible studios get two months free on a 12-month lease. Pick a studio to see the effective monthly rent once those free months are spread across the year.</p>
+          </div>
+          <div class="rent-calc__panel">
+            <div class="rent-calc__field">
+              <label for="calc-unit">Choose a studio</label>
+              <select id="calc-unit" aria-label="Choose a studio for the effective-rent calculator"></select>
+            </div>
+            <div class="rent-calc__results" id="calc-results" aria-live="polite"></div>
+          </div>
         </div>
 
         <!-- Controls -->

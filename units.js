@@ -15,11 +15,12 @@
        notes   : extra badge(s), e.g. a fixed "12-month lease" label.
      ------------------------------------------------------------------ */
   var UNITS = [
-    { num: 565, rent: 2046, videoId: "pP9hCHbYE6M", flexible: true, promo: true },
     { num: 571, rent: 2041, videoId: "8hyo_6ry4wU", flexible: true, promo: true },
     { num: 351, rent: 2020, videoId: "", flexible: true, promo: true },
+    { num: 270, rent: 1995, videoId: "", flexible: true, promo: true },
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM", flexible: true, promo: true },
-    { num: 361, rent: 1950, videoId: "", flexible: true, promo: true }
+    { num: 361, rent: 1950, videoId: "", flexible: true, promo: true },
+    { num: 263, rent: 1407, videoId: "", notes: [{ text: "12-month lease" }] }
   ];
 
   var CALENDLY_URL = "https://calendly.com/basepointpm/alma-gastown";
@@ -195,16 +196,62 @@
   }
   render(sortSelect ? sortSelect.value : "affordable");
 
-  /* ---- Filter chips + promo-banner CTA (event delegation) ----------- */
+  /* ---- Effective-rent calculator (promo studios only) --------------- */
+  // Shows what the 2-months-free offer means in practice: the free months
+  // spread across a 12-month lease, plus the yearly saving. Outputs are
+  // rendered as .money spans so the currency selector converts them too.
+  (function initCalc() {
+    var sel = document.getElementById("calc-unit");
+    var out = document.getElementById("calc-results");
+    if (!sel || !out) return;
+
+    var FREE_MONTHS = 2;
+    var TERM_MONTHS = 12;
+    var promoUnits = UNITS.filter(function (u) { return u.promo; }).sort(SORTERS.highest);
+
+    var wrap = sel.closest(".rent-calc");
+    if (!promoUnits.length) { if (wrap) wrap.hidden = true; return; } // no offer, no calculator
+
+    sel.innerHTML = promoUnits.map(function (u) {
+      return '<option value="' + u.num + '">Unit ' + u.num + "</option>";
+    }).join("");
+
+    function unitByNum(n) {
+      for (var i = 0; i < UNITS.length; i++) { if (UNITS[i].num === Number(n)) return UNITS[i]; }
+      return null;
+    }
+
+    function row(label, cad, hero) {
+      return '<div class="calc-row' + (hero ? " calc-row--hero" : "") + '">' +
+        '<span class="calc-label">' + label + "</span>" +
+        '<span class="calc-val money" data-cad="' + cad + '">' + formatMoney(cad, "CAD", 1) + "</span>" +
+        "</div>";
+    }
+
+    function renderCalc() {
+      var u = unitByNum(sel.value);
+      if (!u) return;
+      var effective = u.rent * (TERM_MONTHS - FREE_MONTHS) / TERM_MONTHS; // rent * 10/12
+      var saved = u.rent * FREE_MONTHS;                                   // 2 months back
+      out.innerHTML =
+        row("Monthly rent", u.rent, false) +
+        row("Effective monthly rent", Number(effective.toFixed(2)), true) +
+        row("You save over 12 months", saved, false) +
+        '<p class="calc-foot">Two months free (first and last) on a 12-month lease. ' +
+          "Flexible stays are also available at the regular monthly rent.</p>";
+      if (activeCurrency !== "CAD") paintPrices(activeCurrency);
+    }
+
+    sel.addEventListener("change", renderCalc);
+    renderCalc();
+  })();
+
+  /* ---- Filter chips (event delegation) ------------------------------ */
   document.addEventListener("click", function (e) {
     var fb = e.target.closest && e.target.closest("[data-filter]");
     if (!fb) return;
     e.preventDefault();
     applyFilter(fb.getAttribute("data-filter"));
-    if (fb.classList.contains("promo-banner__cta")) {
-      var sec = document.getElementById("units");
-      if (sec) sec.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-    }
   });
 
   /* ---- Currency wiring ---------------------------------------------- */
