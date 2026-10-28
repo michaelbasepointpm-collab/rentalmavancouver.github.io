@@ -38,6 +38,7 @@
   --navy: #1a2732;
   --ink: #101010;
   --white: #ffffff;
+  --gold: #ffd401;            /* status + offer highlight (on navy/dark) */
   --pink: #f2afc5;
   --pink-2: #efb9c3;
 
@@ -246,10 +247,12 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   min-height: 48px;
 }
 .btn-apply::after {
-  content: " "; width: 0%; height: 100%; background: var(--navy);
-  position: absolute; right: 0; transition: all 0.4s ease-in-out;
+  content: " "; width: 100%; height: 100%; background: var(--navy);
+  position: absolute; left: 0; top: 0;
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform 0.4s var(--ease-in-out);
 }
-.btn-apply:hover::after { right: auto; left: 0; width: 100%; }
+.btn-apply:hover::after { transform: scaleX(1); }
 .btn-apply span {
   position: relative; z-index: 1; text-align: center; width: 100%;
   padding: 14px 22px; color: var(--ink); font-size: 0.95rem; font-weight: 700;
@@ -494,7 +497,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .promo-band__inner { display: flex; align-items: center; justify-content: center; gap: var(--sp-5); flex-wrap: wrap; padding-block: var(--sp-4); text-align: center; }
 .promo-band__text { font-size: var(--fs-100); font-weight: 600; }
 .promo-band__text strong { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.15em; }
-.promo-band__cta { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 18px; background: var(--ink); color: #fff; border-radius: var(--r-pill); font-size: var(--fs-50); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; transition: transform var(--dur-fast) var(--ease-out); }
+.promo-band__cta { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; background: var(--ink); color: #fff; border-radius: var(--r-pill); font-size: var(--fs-50); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; transition: transform var(--dur-fast) var(--ease-out); }
 .promo-band__cta:hover { transform: translateY(-1px); }
 
 /* Effective-rent calculator (top of the studios section) */
@@ -504,7 +507,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   background: var(--navy); color: #fff; border-radius: var(--r-lg);
   padding: var(--sp-10) var(--sp-12); box-shadow: var(--shadow-2);
 }
-.rent-calc .eyebrow { color: #ffd401; }
+.rent-calc .eyebrow { color: var(--gold); }
 .rent-calc__intro h3 { font-size: var(--fs-400); margin-top: var(--sp-2); }
 .rent-calc__sub { margin-top: var(--sp-3); color: rgba(255,255,255,0.75); line-height: 1.5; }
 .rent-calc__panel { display: flex; flex-direction: column; gap: var(--sp-5); }
@@ -524,8 +527,8 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .calc-val { font-family: var(--font-display); font-size: var(--fs-300); white-space: nowrap; }
 .calc-row--hero { border-bottom: 0; padding-top: var(--sp-3); }
 .calc-row--hero .calc-label { color: #fff; font-weight: 600; }
-.calc-row--hero .calc-val { color: #ffd401; font-size: var(--fs-500); }
-.calc-foot { margin-top: var(--sp-3); font-size: var(--fs-50); color: rgba(255,255,255,0.65); line-height: 1.5; }
+.calc-row--hero .calc-val { color: var(--gold); font-size: var(--fs-500); }
+.calc-foot { margin-top: var(--sp-3); font-size: var(--fs-50); color: rgba(255,255,255,0.75); line-height: 1.5; }
 
 @media (max-width: 760px) {
   .rent-calc { grid-template-columns: 1fr; padding: var(--sp-8); gap: var(--sp-6); }
@@ -533,7 +536,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 .units-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-6); }
 .units-controls__right { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
 .unit-filters { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 5px; background: rgba(16,16,16,0.045); border: 1px solid var(--line); border-radius: var(--r-pill); }
-.filter-btn { border: none; padding: 9px 16px; border-radius: var(--r-pill); background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
+.filter-btn { display: inline-flex; align-items: center; min-height: 44px; border: none; padding: 8px 18px; border-radius: var(--r-pill); background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
 .filter-btn:hover { color: var(--ink); background: var(--white); }
 .filter-btn.active { background: var(--ink); color: #fff; }
 .sort { display: inline-flex; align-items: center; gap: var(--sp-3); }
@@ -569,7 +572,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
 }
 .unit-notes { position: absolute; z-index: 2; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; max-width: calc(100% - 24px); }
 .unit-note { background: var(--white); color: var(--ink); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 6px 12px; border-radius: var(--r-pill); box-shadow: var(--shadow-1); white-space: nowrap; }
-.unit-note--status { background: #ffd401; color: var(--ink); } /* high-visibility status (pending) */
+.unit-note--status { background: var(--gold); color: var(--ink); } /* high-visibility status (pending) */
 .play-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.94); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; transition: transform var(--dur) var(--ease-out), background var(--dur) var(--ease-out); }
 .play-btn svg { width: 24px; height: 24px; margin-left: 3px; }
 .play-btn:hover { transform: scale(1.06); background: #fff; }
@@ -653,6 +656,7 @@ body.modal-open { overflow: hidden; }
   .promo-grid { grid-template-columns: minmax(0, 360px); }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .video-modal .backdrop, .video-modal .dialog { animation: none; }
   .btn-lift:hover, .btn-lift:active { transform: none; box-shadow: none; }
   .btn-ripple span:not(:nth-child(6)) { transition: none; }
