@@ -9,18 +9,20 @@
 
   /* ------------------------------------------------------------------
      DATA - one inventory. Flags drive the card badges and the filter chips:
-       videoId : part after "/embed/" in the YouTube URL; "" shows Coming Soon.
-       flexible: shorter lease terms available at the regular monthly rate.
-       promo   : 2 months free (first + last month) on a 1-year lease.
-       notes   : extra badge(s), e.g. a fixed "12-month lease" label.
+       videoId     : part after "/embed/" in the YouTube URL; "" shows Coming Soon.
+       videoFromNum: borrow another unit's walkthrough (no own footage yet).
+                     Shows that unit's video plus a "Similar unit" badge.
+       flexible    : shorter lease terms available at the regular monthly rate.
+       promo       : 2 months free (first + last month) on a 1-year lease.
+       notes       : extra badge(s), e.g. a fixed "12-month lease" label.
      ------------------------------------------------------------------ */
   var UNITS = [
-    { num: 571, rent: 2041, videoId: "8hyo_6ry4wU", flexible: true, promo: true },
     { num: 351, rent: 2020, videoId: "", flexible: true, promo: true },
     { num: 270, rent: 1995, videoId: "", flexible: true, promo: true },
     { num: 364, rent: 1995, videoId: "8OgAuV5E0AM", flexible: true, promo: true },
     { num: 361, rent: 1950, videoId: "", flexible: true, promo: true },
-    { num: 263, rent: 1407, videoId: "", notes: [{ text: "12-month lease" }] }
+    { num: 567, rent: 1786, videoId: "", notes: [{ text: "12-month lease" }] },
+    { num: 654, rent: 1688, videoId: "", videoFromNum: 270, notes: [{ text: "12-month lease" }] }
   ];
 
   var CALENDLY_URL = "https://calendly.com/basepointpm/alma-gastown";
@@ -85,6 +87,11 @@
     return String(s).replace(/"/g, "&quot;");
   }
 
+  function findUnit(n) {
+    for (var i = 0; i < UNITS.length; i++) { if (UNITS[i].num === Number(n)) return UNITS[i]; }
+    return null;
+  }
+
   /* ---- Sorting ------------------------------------------------------ */
   var SORTERS = {
     affordable: function (a, b) { return a.rent - b.rent; },
@@ -94,13 +101,16 @@
 
   /* ---- Card markup -------------------------------------------------- */
   function cardHTML(u) {
-    var hasVideo = !!u.videoId;
+    // A unit with no footage of its own can borrow a similar unit's walkthrough.
+    var borrowed = (!u.videoId && u.videoFromNum) ? (findUnit(u.videoFromNum) || {}).videoId || "" : "";
+    var vid = u.videoId || borrowed;
+    var hasVideo = !!vid;
     var thumb = hasVideo
-      ? 'style="background-image:url(https://img.youtube.com/vi/' + escapeAttr(u.videoId) + '/hqdefault.jpg)"'
+      ? 'style="background-image:url(https://img.youtube.com/vi/' + escapeAttr(vid) + '/hqdefault.jpg)"'
       : 'style="background-image:url(assets/images/units/coming-soon.jpg)"'; // no video yet
 
     var mediaInner = hasVideo
-      ? '<button class="play-btn" data-video="' + escapeAttr(u.videoId) +
+      ? '<button class="play-btn" data-video="' + escapeAttr(vid) +
         '" data-unit="' + u.num + '" aria-label="Play walkthrough video for unit ' + u.num + '">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
         "</button>"
@@ -115,6 +125,7 @@
     if (u.flexible) badges.push({ text: "Flexible" });
     if (u.notes) badges = badges.concat(u.notes);
     if (u.note) badges.push({ text: u.note, kind: u.noteKind });
+    if (borrowed) badges.push({ text: "Similar unit" }); // showing a comparable unit's video
     var noteBadge = badges.length
       ? '<div class="unit-notes">' + badges.map(function (n) {
           return '<span class="unit-note' + (n.kind === "status" ? " unit-note--status" : "") + '">' + n.text + "</span>";
@@ -216,11 +227,6 @@
       return '<option value="' + u.num + '">Unit ' + u.num + "</option>";
     }).join("");
 
-    function unitByNum(n) {
-      for (var i = 0; i < UNITS.length; i++) { if (UNITS[i].num === Number(n)) return UNITS[i]; }
-      return null;
-    }
-
     function row(label, cad, hero) {
       return '<div class="calc-row' + (hero ? " calc-row--hero" : "") + '">' +
         '<span class="calc-label">' + label + "</span>" +
@@ -229,7 +235,7 @@
     }
 
     function renderCalc() {
-      var u = unitByNum(sel.value);
+      var u = findUnit(sel.value);
       if (!u) return;
       var effective = u.rent * (TERM_MONTHS - FREE_MONTHS) / TERM_MONTHS; // rent * 10/12
       var saved = u.rent * FREE_MONTHS;                                   // 2 months back
