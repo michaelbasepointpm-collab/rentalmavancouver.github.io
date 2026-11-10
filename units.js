@@ -22,7 +22,7 @@
     { num: 351, rent: 2020, videoId: "xNEewx8bYEs", videoSimilar: true, flexible: true, promo: true },
     { num: 270, rent: 1995, videoId: "5Xid7jBf9SY", videoSimilar: true, flexible: true, promo: true },
     { num: 361, rent: 1950, videoId: "MOkXb2JNf2o", flexible: true, promo: true },
-    { num: 567, rent: 1786, videoId: "", flexible: true, promo: true }
+    { num: 567, rent: 1786, videoId: "", notes: [{ text: "12-month lease" }] }
   ];
 
   var CALENDLY_URL = "https://calendly.com/basepointpm/alma-gastown";
