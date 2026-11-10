@@ -534,6 +534,7 @@ h1, h2, h3 { line-height: 1.04; font-weight: 700; letter-spacing: -0.01em; overf
   .rent-calc { grid-template-columns: 1fr; padding: var(--sp-8); gap: var(--sp-6); }
 }
 .units-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; margin-bottom: var(--sp-6); }
+.units-controls--end { justify-content: flex-end; }
 .units-controls__right { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; }
 .unit-filters { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 5px; background: rgba(16,16,16,0.045); border: 1px solid var(--line); border-radius: var(--r-pill); }
 .filter-btn { display: inline-flex; align-items: center; min-height: 44px; border: none; padding: 8px 18px; border-radius: var(--r-pill); background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
