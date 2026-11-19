@@ -13,7 +13,7 @@
        videoSimilar: the video is a comparable unit's walkthrough, not this
                      unit's own footage; adds a "Similar unit" badge.
        flexible    : shorter lease terms available at the regular monthly rate.
-       promo       : 2 months free (first + last month) on a 12-month lease.
+       promo       : 1 month free, amortized across a 12-month lease.
        notes       : extra badge(s), e.g. a fixed "12-month lease" label.
      ------------------------------------------------------------------ */
   var UNITS = [
@@ -37,18 +37,19 @@
   var ratesCache = { CAD: 1, USD: 0.73, EUR: 0.67, GBP: 0.57, BRL: 3.95, CNY: 5.2 };
   var ratesLive = false;
 
-  function formatMoney(cadAmount, currency, rate) {
+  function formatMoney(cadAmount, currency, rate, decimals) {
     var amount = cadAmount * (rate || 1);
-    // en-US renders CAD as "CA$" (distinct from USD "$"), EUR/GBP/BRL/KRW as their symbols.
+    var d = decimals || 0; // most prices are whole dollars; the prorated rent shows cents
+    // en-US renders CAD as "CA$" (distinct from USD "$"), EUR/GBP/BRL/CNY as their symbols.
     return new Intl.NumberFormat("en-US", {
-      style: "currency", currency: currency, maximumFractionDigits: 0
+      style: "currency", currency: currency, minimumFractionDigits: d, maximumFractionDigits: d
     }).format(amount);
   }
 
   function paintPrices(currency) {
     var rate = ratesCache[currency] || 1;
     document.querySelectorAll(".money").forEach(function (m) {
-      m.textContent = formatMoney(Number(m.dataset.cad), currency, rate);
+      m.textContent = formatMoney(Number(m.dataset.cad), currency, rate, Number(m.dataset.decimals || 0));
     });
     var sel = document.getElementById("currency");
     if (sel && sel.value !== currency) sel.value = currency;
@@ -118,7 +119,7 @@
     // Badges from flags, plus any explicit notes. "2 months free" is the gold
     // (status) highlight; "Flexible" and fixed notes use the neutral pill.
     var badges = [];
-    if (u.promo) badges.push({ text: "2 months free", kind: "status" });
+    if (u.promo) badges.push({ text: "1 month free", kind: "status" });
     if (u.flexible) badges.push({ text: "Flexible" });
     if (u.notes) badges = badges.concat(u.notes);
     if (u.note) badges.push({ text: u.note, kind: u.noteKind });
@@ -205,15 +206,15 @@
   render(sortSelect ? sortSelect.value : "affordable");
 
   /* ---- Effective-rent calculator (promo studios only) --------------- */
-  // Shows what the 2-months-free offer means in practice: the free months
-  // spread across a 12-month lease, plus the yearly saving. Outputs are
+  // Shows what the 1-month-free offer means in practice: the free month
+  // amortized across a 12-month lease, plus the yearly saving. Outputs are
   // rendered as .money spans so the currency selector converts them too.
   (function initCalc() {
     var sel = document.getElementById("calc-unit");
     var out = document.getElementById("calc-results");
     if (!sel || !out) return;
 
-    var FREE_MONTHS = 2;
+    var FREE_MONTHS = 1;
     var TERM_MONTHS = 12;
     var promoUnits = UNITS.filter(function (u) { return u.promo; }).sort(SORTERS.highest);
 
@@ -224,24 +225,27 @@
       return '<option value="' + u.num + '">Unit ' + u.num + "</option>";
     }).join("");
 
-    function row(label, cad, hero) {
+    function row(label, cad, hero, decimals) {
+      var dec = decimals || 0;
       return '<div class="calc-row' + (hero ? " calc-row--hero" : "") + '">' +
         '<span class="calc-label">' + label + "</span>" +
-        '<span class="calc-val money" data-cad="' + cad + '">' + formatMoney(cad, "CAD", 1) + "</span>" +
+        '<span class="calc-val money" data-cad="' + cad + '" data-decimals="' + dec + '">' +
+          formatMoney(cad, "CAD", 1, dec) + "</span>" +
         "</div>";
     }
 
     function renderCalc() {
       var u = findUnit(sel.value);
       if (!u) return;
-      var effective = u.rent * (TERM_MONTHS - FREE_MONTHS) / TERM_MONTHS; // rent * 10/12
-      var saved = u.rent * FREE_MONTHS;                                   // 2 months back
+      var effective = u.rent * (TERM_MONTHS - FREE_MONTHS) / TERM_MONTHS; // rent * 11/12
+      var saved = u.rent * FREE_MONTHS;                                   // one month back
       out.innerHTML =
-        row("Monthly rent", u.rent, false) +
-        row("Effective monthly rent", Number(effective.toFixed(2)), true) +
-        row("You save over 12 months", saved, false) +
-        '<p class="calc-foot">Two months free (first and last) on a 12-month lease. ' +
-          "Flexible stays are also available at the regular monthly rent.</p>";
+        row("Monthly rent", u.rent, false, 0) +
+        row("Effective monthly rent", Number(effective.toFixed(2)), true, 2) +
+        row("You save over 12 months", saved, false, 0) +
+        '<p class="calc-foot">The effective monthly rent amortizes one free month across a ' +
+          "12-month lease: 11/12 of the face rent. Leases are signed at the face rent; " +
+          "flexible stays are available at the regular monthly rate.</p>";
       if (activeCurrency !== "CAD") paintPrices(activeCurrency);
     }
 
